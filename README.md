@@ -1,5 +1,5 @@
 # Animoji : Animate
-Facial-Landmarks Detection based animating application similar to Apple-Animoji
+Facial-Landmarks Detection based animating application similar to Apple-Animoji&trade;
 
 <h2>Dependencies</h2>
 <ul>
