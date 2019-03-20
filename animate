@@ -4,6 +4,7 @@ from glumpy import app, gloo, gl
 import numpy as np
 import cv2
 from utils.detect import get_face, get_marks
+from utils.shaders import img_vertex, img_fragment
 
 vertex = """
 attribute vec2 position;
@@ -23,6 +24,10 @@ nose2 = gloo.Program(vertex, frag, count=5)
 lip1 = gloo.Program(vertex, frag, count=12)
 lip2 = gloo.Program(vertex, frag, count=8)
 jaw = gloo.Program(vertex, frag, count=17)
+
+quad = gloo.Program(img_vertex, img_fragment, count=4)
+quad['position'] = [(-0.6,-1), (-1,-1), (-0.6,-0.6), (-1,-0.6)]
+quad['texcoord'] = [( 0, 1), ( 1, 1), ( 0, 0), ( 1, 0)]
 gl.glLineWidth(1.5)
 
 cap = cv2.VideoCapture(0)
@@ -50,6 +55,9 @@ def on_draw(dt):
     lip1['position'] = marks[48:60]
     lip2['position'] = marks[60:68]
     jaw['position'] = marks[0:17]
+    img = frame[face_coord.top()-20:face_coord.bottom()+20, face_coord.left()-10:face_coord.right()+10]
+    img = cv2.cvtColor(cv2.resize(img, (100,100)), cv2.COLOR_BGR2RGB)
+    quad['texture'] = img
     win.clear()
     brow1.draw(gl.GL_LINE_LOOP)
     brow2.draw(gl.GL_LINE_LOOP)
@@ -60,6 +68,8 @@ def on_draw(dt):
     lip1.draw(gl.GL_LINE_LOOP)
     lip2.draw(gl.GL_LINE_LOOP)
     jaw.draw(gl.GL_LINE_STRIP)
+    quad.draw(gl.GL_TRIANGLE_STRIP)
+
 
 app.run(framerate=20)
 cap.release()
