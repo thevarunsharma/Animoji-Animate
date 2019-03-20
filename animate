@@ -23,6 +23,7 @@ nose2 = gloo.Program(vertex, frag, count=5)
 lip1 = gloo.Program(vertex, frag, count=12)
 lip2 = gloo.Program(vertex, frag, count=8)
 jaw = gloo.Program(vertex, frag, count=17)
+gl.glLineWidth(1.5)
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_POS_MSEC, 50)
