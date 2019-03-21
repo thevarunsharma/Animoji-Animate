@@ -31,7 +31,7 @@ quad['texcoord'] = [( 0, 1), ( 1, 1), ( 0, 0), ( 1, 0)]
 gl.glLineWidth(1.5)
 
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_POS_MSEC, 50)
+cap.set(cv2.CAP_PROP_POS_MSEC, 40)
 face_coord = None
 while face_coord is None:
     ret, frame = cap.read()
@@ -71,5 +71,6 @@ def on_draw(dt):
     quad.draw(gl.GL_TRIANGLE_STRIP)
 
 
-app.run(framerate=20)
+app.run(framerate=25)
 cap.release()
+
