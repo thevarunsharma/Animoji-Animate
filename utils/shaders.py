@@ -1,3 +1,7 @@
+"""
+This file contains GLSL shaders for rendering Image on GL Window
+"""
+
 img_vertex = """
     attribute vec2 position;
     attribute vec2 texcoord;
